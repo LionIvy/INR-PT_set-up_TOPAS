@@ -1,0 +1,20 @@
+includeFile = Materials.txt
+
+s:Ge/graphiteCollimator/Parent   = "World"
+s:Ge/graphiteCollimator/Type     = "TsBox"
+s:Ge/graphiteCollimator/Material = "Carbon"
+d:Ge/graphiteCollimator/HLX      = 7.5 cm
+d:Ge/graphiteCollimator/HLY      = 7.5 cm
+d:Ge/graphiteCollimator/HLZ      = 13.75 cm
+d:Ge/graphiteCollimator/TransZ   = -646.25 cm
+s:Ge/graphiteCollimator/Color = "gray"
+
+s:Ge/graphiteCollimatorHole/Parent   = "graphiteCollimator"
+s:Ge/graphiteCollimatorHole/Type     = "TsCylinder"
+s:Ge/graphiteCollimatorHole/Material = "Air"
+d:Ge/graphiteCollimatorHole/RMin         =   0. mm
+d:Ge/graphiteCollimatorHole/RMax         =   1. cm
+d:Ge/graphiteCollimatorHole/HL           =   Ge/graphiteCollimator/HLZ cm
+d:Ge/graphiteCollimatorHole/SPhi         =   0. deg
+d:Ge/graphiteCollimatorHole/DPhi         =   360. deg
+s:Ge/graphiteCollimatorHole/DrawingStyle = "FullWireFrame"

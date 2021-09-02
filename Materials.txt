@@ -1,0 +1,121 @@
+s:Ma/DefaultColor = "white"
+i:Ma/Verbosity = 0 # Set to 1 to report each time a material is defined
+
+sv:Ma/Vacuum/Components = 4 "Carbon" "Nitrogen" "Oxygen" "Argon"
+uv:Ma/Vacuum/Fractions = 4 0.000124 0.755268 0.231781 0.012827
+d:Ma/Vacuum/Density = 1.0E-25 g/cm3
+s:Ma/Vacuum/State = "Gas"
+d:Ma/Vacuum/Temperature = 2.73 kelvin
+d:Ma/Vacuum/Pressure = 3.0E-18 pascal
+s:Ma/Vacuum/DefaultColor = "skyblue"
+
+sv:Ma/Carbon/Components = 1 "Carbon"
+uv:Ma/Carbon/Fractions = 1 1.0
+d:Ma/Carbon/Density = 1.867 g/cm3
+d:Ma/Carbon/MeanExcitationEnergy = 78 eV
+s:Ma/Carbon/DefaultColor = "green"
+
+sv:Ma/Aluminum/Components = 1 "Aluminum"
+uv:Ma/Aluminum/Fractions = 1 1.0
+d:Ma/Aluminum/Density = 2.6989 g/cm3
+s:Ma/Aluminum/DefaultColor = "skyblue"
+i:Ma/Aluminum/AtomicNumber =  13
+d:Ma/Aluminum/AtomicMass = 26.98154 g/mole
+
+sv:Ma/Nickel/Components = 1 "Nickel"
+uv:Ma/Nickel/Fractions = 1 1.0
+d:Ma/Nickel/Density = 8.902 g/cm3
+s:Ma/Nickel/DefaultColor = "indigo"
+
+sv:Ma/Copper/Components = 1 "Copper"
+uv:Ma/Copper/Fractions = 1 1.0
+d:Ma/Copper/Density = 8.96 g/cm3
+s:Ma/Copper/DefaultColor = "orange"
+
+sv:Ma/Iron/Components = 1 "Iron"
+uv:Ma/Iron/Fractions = 1 1.0
+d:Ma/Iron/Density = 7.87 g/cm3
+s:Ma/Iron/DefaultColor = "skyblue"
+
+sv:Ma/Tantalum/Components = 1 "Tantalum"
+uv:Ma/Tantalum/Fractions = 1 1.0
+d:Ma/Tantalum/Density = 16.654 g/cm3
+s:Ma/Tantalum/DefaultColor = "indigo"
+
+sv:Ma/Lead/Components = 1 "Lead"
+uv:Ma/Lead/Fractions = 1 1.0
+d:Ma/Lead/Density = 11.35 g/cm3
+i:Ma/Lead/AtomicNumber =  82
+d:Ma/Lead/AtomicMass = 207.19 g/mole
+d:Ma/Lead/MeanExcitationEnergy = 823 eV
+s:Ma/Lead/DefaultColor = "brown"
+
+sv:Ma/Air/Components = 4 "Carbon" "Nitrogen" "Oxygen" "Argon"
+uv:Ma/Air/Fractions = 4 0.000124 0.755268 0.231781 0.012827
+d:Ma/Air/Density = 1.20484 mg/cm3
+d:Ma/Air/MeanExcitationEnergy = 85.7 eV
+s:Ma/Air/DefaultColor = "lightblue"
+
+sv:Ma/Brass/Components = 2 "Copper" "Zinc"
+uv:Ma/Brass/Fractions = 2 0.7 0.3
+d:Ma/Brass/Density = 8.550 g/cm3
+d:Ma/Brass/MeanExcitationEnergy = 324.4 eV
+s:Ma/Brass/DefaultColor = "grass"
+
+sv:Ma/Lexan/Components = 3 "Hydrogen" "Carbon" "Oxygen"
+uv:Ma/Lexan/Fractions = 3 0.055491 0.755751 0.188758
+d:Ma/Lexan/Density = 1.2 g/cm3
+d:Ma/Lexan/MeanExcitationEnergy = 73.1 eV
+s:Ma/Lexan/DefaultColor = "grey"
+
+sv:Ma/Lucite/Components = 3 "Hydrogen" "Carbon" "Oxygen"
+uv:Ma/Lucite/Fractions = 3 0.080538 0.599848 0.319614
+d:Ma/Lucite/Density = 1.190 g/cm3
+d:Ma/Lucite/MeanExcitationEnergy = 74.0 eV
+s:Ma/Lucite/DefaultColor = "grey"
+
+sv:Ma/Mylar/Components = 3 "Hydrogen" "Carbon" "Oxygen"
+uv:Ma/Mylar/Fractions = 3 0.041959 0.625017 0.333025
+d:Ma/Mylar/Density = 1.40 g/cm3
+s:Ma/Mylar/DefaultColor = "red"
+
+sv:Ma/Mylon/Components = 4 "Hydrogen" "Carbon" "Nitrogen" "Oxygen"
+uv:Ma/Mylon/Fractions = 4 0.097976 0.636856 0.123779 0.141389
+d:Ma/Mylon/Density = 1.140 g/cm3
+s:Ma/Mylon/DefaultColor = "purple"
+
+sv:Ma/Kapton/Components = 4 "Hydrogen" "Carbon" "Nitrogen" "Oxygen"
+uv:Ma/Kapton/Fractions = 4 0.026362 0.691133 0.073270 0.209235
+d:Ma/Kapton/Density = 1.420 g/cm3
+s:Ma/Kapton/DefaultColor = "purple"
+
+sv:Ma/Water_75eV/Components = 2 "Hydrogen" "Oxygen"
+uv:Ma/Water_75eV/Fractions = 2 0.111894 0.888106
+d:Ma/Water_75eV/Density = 1.0 g/cm3
+d:Ma/Water_75eV/MeanExcitationEnergy = 75.0 eV
+s:Ma/Water_75eV/DefaultColor = "blue"
+
+sv:Ma/Titanium/Components = 1 "Titanium"
+uv:Ma/Titanium/Fractions = 1 1.0
+d:Ma/Titanium/Density = 4.54 g/cm3
+s:Ma/Titanium/DefaultColor = "blue"
+
+sv:Ma/Steel/Components = 8 "Carbon" "Silicon" "Phosphorus" "Sulfur" "Chromium" "Manganese" "Iron" "Nickel"
+uv:Ma/Steel/Fractions = 8 0.0015 0.01 0.00045 0.0003 0.19 0.02 0.67775 0.1
+d:Ma/Steel/Density = 8.027 g/cm3
+s:Ma/Steel/DefaultColor = "lightblue"
+
+
+# https://physics.nist.gov/cgi-bin/Star/compos.pl?matno=144
+sv:Ma/Conrete/Components = 10 "Hydrogen" "Carbon" "Oxygen" "Sodium" "Magnesium" "Aluminum" "Silicon" "Potassium" "Calcium" "Iron"
+uv:Ma/Conrete/Fractions = 10 0.01 0.001 0.529107 0.016000 0.002000 0.033872 0.337021 0.013000 0.044000 0.014000
+d:Ma/Conrete/Density = 2.3 g/cm3
+d:Ma/Conrete/MeanExcitationEnergy = 135.2 eV
+s:Ma/Conrete/DefaultColor = "grey"
+
+#https://physics.nist.gov/cgi-bin/Star/compos.pl?refer=ap&matno=221
+sv:Ma/Polyethylene/Components = 2 "Hydrogen" "Carbon"
+uv:Ma/Polyethylene/Fractions = 2 0.143711 0.856289
+d:Ma/Polyethylene/Density = 0.940 g/cm3
+d:Ma/Polyethylene/MeanExcitationEnergy = 57.40 eV
+s:Ma/Polyethylene/DefaultColor = "white"

@@ -1,0 +1,26 @@
+includeFile = Materials.txt
+
+s:Ge/wTankBody/Parent   = "World"
+s:Ge/wTankBody/Type     = "TsBox"
+s:Ge/wTankBody/Material = "Lucite"
+d:Ge/wTankBody/HLX      = 20.5 cm
+d:Ge/wTankBody/HLY      = 20.5 cm
+d:Ge/wTankBody/HLZ      = 20.5 cm
+d:Ge/wTankBody/TransZ   = 300. cm
+s:Ge/wTankBody/DrawingStyle = "WireFrame"
+
+s:Ge/wTank/Parent   = "wTankBody"
+s:Ge/wTank/Type     = "TsBox"
+s:Ge/wTank/Material = "G4_WATER"
+d:Ge/wTank/HLX      = 20.0 cm
+d:Ge/wTank/HLY      = 20.0 cm
+d:Ge/wTank/HLZ      = 20.0 cm
+i:Sc/wTank/XBins = 400
+i:Sc/wTank/YBins = 400
+i:Sc/wTank/ZBins = 400
+
+s:Sc/wTankScorer/Quantity = "DoseToMaterial"
+s:Sc/wTankScorer/Component = "wTank"
+s:Sc/wTankScorer/Material = "G4_WATER"
+s:Sc/wTank/OutputFile = "wTankDose.dat"
+S:Sc/wTankScorer/IfOutputFileAlreadyExists = "Overwrite"

@@ -1,0 +1,100 @@
+includeFile = Materials.txt
+
+
+
+
+#BeamPipe
+s:Ge/BeamPipeBody/Parent    = "World"
+s:Ge/BeamPipeBody/Type = "TsCylinder"
+s:Ge/BeamPipeBody/Material = "Vacuum"
+d:Ge/BeamPipeBody/RMin         =    0. mm
+d:Ge/BeamPipeBody/RMax         =   10. cm
+d:Ge/BeamPipeBody/HL           =   10. cm
+d:Ge/BeamPipeBody/SPhi         =    0. deg
+d:Ge/BeamPipeBody/DPhi         =  360. deg
+d:Ge/BeamPipe/BodyTransX       =    0. m
+d:Ge/BeamPipeBody/TransY       =    0. m
+d:Ge/BeamPipeBody/TransZ       =  Ge/BeamPipeBody/HL - Ge/World/HLZ m
+s:Ge/BeamPipeBody/Color = "red"
+s:Ge/BeamPipeBody/DrawingStyle = "FullWireFrame"
+
+s:Ge/ExitWindow/Parent       = "BeamPipeBody"
+s:Ge/ExitWindow/Type         = "TsCylinder"
+s:Ge/ExitWindow/Material     = "Aluminum"
+d:Ge/ExitWindow/RMin         =   0. mm
+d:Ge/ExitWindow/RMax         =   Ge/BeamPipeBody/RMax cm
+d:Ge/ExitWindow/HL           =   0.05225 cm # 0.5*0.1045 cm
+d:Ge/ExitWindow/SPhi         =   0. deg
+d:Ge/ExitWindow/DPhi         =   360. deg
+d:Ge/ExitWindow/TransZ       =  Ge/BeamPipeBody/HL - Ge/ExitWindow/HL cm
+s:Ge/ExitWindow/Color = "skyblue"
+s:Ge/ExitWindow/DrawingStyle = "Solid"
+
+#Wall
+s:Ge/Wall/Parent = "World"
+s:Ge/Wall/Type = "wallwithahole"
+s:Ge/Wall/Material = "Conrete"
+d:Ge/Wall/HLX = 2.0  m
+d:Ge/Wall/HLY = 2.0  m
+d:Ge/Wall/HLZ = 60.0 cm
+d:Ge/Wall/RMin = 0. mm
+d:Ge/Wall/RMax = 10. cm
+d:Ge/Wall/HoleRotY = 0.3764 rad
+d:Ge/Wall/RotY = 0.3764 rad
+d:Ge/Wall/TransZ = -64. cm
+s:Ge/Wall/DrawingStyle = "FullWireFrame"#"Solid"
+
+s:Ge/MetalTube/Parent = "World"
+s:Ge/MetalTube/Type = "TsCylinder"
+s:Ge/MetalTube/Material = "Steel"
+d:Ge/MetalTube/HL   = 70.15 cm
+d:Ge/MetalTube/RMin = 5. cm
+d:Ge/MetalTube/RMax = Ge/Wall/RMax cm
+d:Ge/MetalTube/TransZ = Ge/Wall/TransZ  cm
+s:Ge/MetalTube/DrawingStyle = "Solid"
+
+s:Ge/PolyCarbon/Parent = "MetalTube"
+s:Ge/PolyCarbon/Type = "TsCylinder"
+s:Ge/PolyCarbon/Material = "Polyethylene"
+d:Ge/PolyCarbon/HL   = Ge/MetalTube/HL - 3. cm
+d:Ge/PolyCarbon/RMin = Ge/MetalTube/RMin + 5. mm
+d:Ge/PolyCarbon/RMax = Ge/MetalTube/RMax - 5. mm
+s:Ge/PolyCarbon/DrawingStyle = "Solid"
+
+#graphiteCollimator
+includeFile = GeometryComponents/graphite_Collimator.txt
+
+#primaryScatterer
+includeFile = GeometryComponents/primaryScatterer.txt
+
+#waterTank
+includeFile = GeometryComponents/WaterTank.txt
+
+
+
+sv:Ph/Default/Modules = 1 "g4em-standard_opt0"
+
+# s:So/MySource/Type = "Beam"
+# s:So/MySource/BeamParticle = "proton"
+# d:So/MySource/BeamEnergy = 209. MeV
+# u:So/MySource/BeamEnergySpread = 0.5
+# i:So/MySource/NumberOfHistoriesInRun = 100
+
+
+s:So/MySource/Type = "Beam" # Beam, Isotropic, Emittance or PhaseSpace
+s:So/MySource/Component = "BeamPosition"
+s:So/MySource/BeamParticle = "proton"
+d:So/MySource/BeamEnergy = 209.0 MeV
+u:So/MySource/BeamEnergySpread = 0.757504
+s:So/MySource/BeamPositionDistribution = "Gaussian" # None, Flat or Gaussian
+s:So/MySource/BeamPositionCutoffShape = "Ellipse" # Rectangle or Ellipse (if Flat or Gaussian)
+d:So/MySource/BeamPositionCutoffX = 10. cm # X extent of position (if Flat or Gaussian)
+d:So/MySource/BeamPositionCutoffY = 10. cm # Y extent of position (if Flat or Gaussian)
+d:So/MySource/BeamPositionSpreadX = 0.65 cm # distribution (if Gaussian)
+d:So/MySource/BeamPositionSpreadY = 0.65 cm # distribution (if Gaussian)
+s:So/MySource/BeamAngularDistribution = "Gaussian" # None, Flat or Gaussian
+d:So/MySource/BeamAngularCutoffX = 90. deg # X cutoff of angular distrib (if Flat or Gaussian)
+d:So/MySource/BeamAngularCutoffY = 90. deg # Y cutoff of angular distrib (if Flat or Gaussian)
+d:So/MySource/BeamAngularSpreadX = 0.0032 rad # X angular distribution (if Gaussian)
+d:So/MySource/BeamAngularSpreadY = 0.0032 rad # Y angular distribution (if Gaussian)
+i:So/MySource/NumberOfHistoriesInRun = 100

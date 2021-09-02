@@ -1,0 +1,9 @@
+includeFile = Materials.txt
+
+s:Ge/primaryScatterer/Parent   = "World"
+s:Ge/primaryScatterer/Type     = "TsBox"
+s:Ge/primaryScatterer/Material = "Brass"
+d:Ge/primaryScatterer/HLX      = 5 cm
+d:Ge/primaryScatterer/HLY      = 5 cm
+d:Ge/primaryScatterer/HLZ      = 0.05 mm
+d:Ge/primaryScatterer/TransZ   = -631.5 cm
