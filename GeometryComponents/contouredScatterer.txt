@@ -11,17 +11,9 @@ d:Ge/contouredScatterer/DegrHLX  = 5.0 cm
 d:Ge/contouredScatterer/DegrHLY  = 5.0 cm
 s:Ge/contouredScatterer/DegrMaterial = "Lucite"
 i:Ge/contouredScatterer/NbOfDegLayers = 3
-dv:Ge/contouredScatterer/DegLayersHL  = 3 0.135 0.345 0.61 mm
-dv:Ge/contouredScatterer/DegLayersRmax = 3 2.69 5.38 8.07 mm
+dv:Ge/contouredScatterer/DegLayersHL   = 10 2.690 5.380 8.070 10.76 13.45 16.14 18.830 21.520 24.210 26.900 mm
+dv:Ge/contouredScatterer/DegLayersRmax = 10 0.135 0.345 0.610 0.805 0.920 1.00 1.0200 0.9650 0.87 0.35 mm
 
 # d:Ge/contouredScatterer/HLX
 s:Ge/contouredScatterer/DrawingStyle = "Solid"
 d:Ge/contouredScatterer/TransZ   = 15.5 cm
-
-
-
-
-
-
-dv:Ge/contouredScatterer/DegLayersHL   = 10 2.690 5.380 8.070 10.76 13.45 16.14 18.830 21.520 24.210 26.900 mm
-dv:Ge/contouredScatterer/DegLayersRmax = 10 0.135 0.345 0.610 0.805 0.920 1.00 1.0200 0.9650 0.87 0.35 mm
