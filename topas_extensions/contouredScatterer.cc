@@ -19,7 +19,7 @@
 
 #include "G4Box.hh"
 
-#include "G4Cons.hh"
+#include "G4SubtractionSolid.hh"
 
 #include "G4Tubs.hh"
 
@@ -93,11 +93,14 @@ G4VPhysicalVolume* contouredScatterer::Construct()
   G4double HLX, HLY, HLZ;
   HLZ = TotalThickness;
 	//HLY = HLX = 5*cm;
-  maxG4(CompensatorRadii) > CompensatorBoxHLY ?  CompensatorBoxHLY = maxG4(CompensatorRadii) + 1.*mm : false;
-  maxG4(Radii) > CompensatorBoxHLY ? HLY = maxG4(Radii) : HLY = CompensatorBoxHLY;
+  maxG4(CompensatorRadii, NbOfDegLayers) > CompensatorBoxHLY ?  CompensatorBoxHLY = maxG4(CompensatorRadii, NbOfDegLayers) + 1.*mm : false;
+  maxG4(Radii, NbOfScLayers) > CompensatorBoxHLY ? HLY = maxG4(Radii, NbOfScLayers) : HLY = CompensatorBoxHLY;
 
-  maxG4(CompensatorRadii) > CompensatorBoxHLX ?  CompensatorBoxHLX = maxG4(CompensatorRadii) + 1.*mm : false;
-  maxG4(Radii) > CompensatorBoxHLX ? HLX = maxG4(Radii) : HLX = CompensatorBoxHLX;
+  maxG4(CompensatorRadii, NbOfDegLayers) > CompensatorBoxHLX ?  CompensatorBoxHLX = maxG4(CompensatorRadii, NbOfDegLayers) + 1.*mm : false;
+  maxG4(Radii, NbOfScLayers) > CompensatorBoxHLX ? HLX = maxG4(Radii, NbOfScLayers) : HLX = CompensatorBoxHLX;
+
+
+
 
 	G4String envelopeMaterialName = fParentComponent->GetResolvedMaterialName();
 	G4Box* svWholeBox = new G4Box("TotalBox", HLX, HLY, HLZ);
@@ -131,8 +134,8 @@ G4VPhysicalVolume* contouredScatterer::Construct()
 	 lFoilN->SetVisAttributes(red);
 	 bodyNb = i;
   }
-  //--------------------------------------------------------------------------------
-  // Compensator Box
+	//--------------------------------------------------------------------------------
+  // Compensator Box Base
   //--------------------------------------------------------------------------------
 	G4VisAttributes* lblue = new G4VisAttributes( G4Colour(204, 255, 238));
     lblue -> SetVisibility(true);
@@ -141,31 +144,41 @@ G4VPhysicalVolume* contouredScatterer::Construct()
 	    lblue2 -> SetVisibility(true);
 	    lblue2 -> SetForceWireframe(true);
 
-	G4Box* sDegBox = new G4Box("sDegBox", HLX, HLY, CompensatorBoxHLZ);
-	G4LogicalVolume* lDegBox = CreateLogicalVolume("lDegBox", DegMaterial , sDegBox);
+ if( fPm->ParameterExists(    GetFullParmName("PrintInformation"))		&&
+		 		fPm->GetBooleanParameter(GetFullParmName("PrintInformation"))) {
+		 		G4cout<<"Degrader base thickness: "<< 2*CompensatorBaseHLZ /mm << " (mm)" <<G4endl;
+	}
+	G4Box* sDegBaseBox = new G4Box("sDegBox", HLX, HLY, CompensatorBaseHLZ);
+  G4LogicalVolume* lDegBaseBox = CreateLogicalVolume("lDegBaseBox", DegMaterial , sDegBaseBox);
+	ZCPosition = Z0Position + CompensatorBaseHLZ;
+	Z0Position+= 2*CompensatorBaseHLZ;
+	G4ThreeVector* pos    = new G4ThreeVector(0.0, 0.0, ZCPosition);
+	bodyNb++;
+  CreatePhysicalVolume("DegBaseBox", bodyNb , true, lDegBaseBox, 0, pos, fEnvelopePhys);
+	lDegBaseBox->SetVisAttributes(lblue);
+
+  //--------------------------------------------------------------------------------
+  // Compensator Box
+  //--------------------------------------------------------------------------------
+  G4double AirTubeR = maxG4(CompensatorRadii, NbOfDegLayers);
+	std::cout << "/* AirTubeR = */" << AirTubeR << '\n';
+	CompensatorBoxHLZ-=CompensatorBaseHLZ;
+	G4VSolid* sDegBox = new G4Box ("sDegBox", HLX, HLY, CompensatorBoxHLZ);
+	G4VSolid* hole    = new G4Tubs("hole", 0, AirTubeR, CompensatorBoxHLZ, 0, 360*deg);
+
+	G4SubtractionSolid* sHoledDegBox = new G4SubtractionSolid("sDegBox", sDegBox, hole, 0, G4ThreeVector(0.0, 0.0, 0.0));
+	G4LogicalVolume* lDegBox = CreateLogicalVolume("lDegBox", DegMaterial , sHoledDegBox);
 	ZCPosition = Z0Position + CompensatorBoxHLZ;
-	G4ThreeVector* pos2    = new G4ThreeVector(0.0, 0.0, ZCPosition);
-	//	G4PVPlacement* DegBox = new CreatePhysicalVolume("DegBox", bodyNb++, true, lDegBox, 0, pos2, fEnvelopePhys);
-	G4PVPlacement* DegBox = new G4PVPlacement(0, G4ThreeVector(0., 0.,ZCPosition), "DegBox", lDegBox, fEnvelopePhys, true, 0);
-	// physiMotherMod = new G4PVPlacement(rm,positionMotherMod,  "PhysContScattMotherMod",
-	// 				 logicMotherMod,
-	// 				 motherVolume,
-	// 				 false,
-	// 								 0);
-	lDegBox->SetVisAttributes(lblue2);
+	//Z0Position+= 2*CompensatorBoxHLZ;
+	G4ThreeVector* position = new G4ThreeVector(0,0, ZCPosition);
+	bodyNb++;
+	CreatePhysicalVolume("DegBox", bodyNb , true, lDegBox, 0, position, fEnvelopePhys);
+	lDegBox->SetVisAttributes(lblue);
 
   //--------------------------------------------------------------------------------
   // Compensator "Rings"
   //--------------------------------------------------------------------------------
-	G4VisAttributes* EmptyColor = new G4VisAttributes(G4Colour());
-  EmptyColor -> SetVisibility(true);
-  EmptyColor -> SetForceSolid(true);
 
-  Z0Position = -CompensatorBoxHLZ+2*CompensatorBaseHLZ;
-	if( fPm->ParameterExists(    GetFullParmName("PrintInformation"))		&&
-		  fPm->GetBooleanParameter(GetFullParmName("PrintInformation"))) {
-		G4cout<<"Degrader base thickness: "<< 2*CompensatorBaseHLZ /mm << " (mm)" <<G4endl;
-	}
 		for(int i = 0 ; i < NbOfDegLayers ; ++i){
 			bodyNb++;
 			if( fPm->ParameterExists(    GetFullParmName("PrintInformation")) &&
@@ -173,15 +186,15 @@ G4VPhysicalVolume* contouredScatterer::Construct()
 				G4cout<<"Degrading Layer: \"" << i <<"\" , Thickness: "<< 2*CompensatorThickness[i]/mm << " (mm), Radius: "<< CompensatorRadii[i]/mm
 						<<" mm" <<G4endl;
 			}
-	// if (CompensatorRadii[i] ~= 0){
-	 	 G4Tubs* sDegN = new G4Tubs("sDegradingLvl", 0, CompensatorRadii[i], CompensatorThickness[i], 0, 360*deg);
-	 	 G4LogicalVolume* lDegN = CreateLogicalVolume("lDegradingLvl", envelopeMaterialName , sDegN);
+	 if (CompensatorRadii[i] != AirTubeR){
+	 	 G4Tubs* sDegN = new G4Tubs("sDegradingLvl", CompensatorRadii[i], AirTubeR, CompensatorThickness[i], 0, 360*deg);
+	 	 G4LogicalVolume* lDegN = CreateLogicalVolume("lDegradingLvl", DegMaterial, sDegN);
 		 ZCPosition = Z0Position + CompensatorThickness[i];
 		 Z0Position+= 2*CompensatorThickness[i];
 		 G4ThreeVector* pos3    = new G4ThreeVector(0.0, 0.0, ZCPosition);
-		 CreatePhysicalVolume("DegradingLvl", i, true, lDegN, 0, pos3, DegBox);
-		 lDegN->SetVisAttributes(EmptyColor);
-	 // }
+		 CreatePhysicalVolume("DegradingLvl", bodyNb, true, lDegN, 0, pos3, fEnvelopePhys);
+		 lDegN->SetVisAttributes(lblue);
+	  }
 	 // else{
 		//  ZCPosition = Z0Position + CompensatorThickness[i];
 		//  Z0Position+= 2*CompensatorThickness[i];
@@ -195,8 +208,8 @@ G4VPhysicalVolume* contouredScatterer::Construct()
 
 	return fEnvelopePhys;
 }
-G4double contouredScatterer::minG4(G4double* data){
-  int arrSize = sizeof(data)/sizeof(data[0]);
+G4double contouredScatterer::minG4(G4double* data, G4int arrSize){
+  //int arrSize = sizeof(data)/sizeof(data[0]);
   G4double res = data[0];
   if (arrSize == 0 ) return res;
   for(int i=1; i<arrSize; ++i){
@@ -206,8 +219,8 @@ G4double contouredScatterer::minG4(G4double* data){
   }
   return res;
 }
-G4double contouredScatterer::maxG4(G4double* data){
-  int arrSize = sizeof(data)/sizeof(data[0]);
+G4double contouredScatterer::maxG4(G4double* data, G4int arrSize){
+  //int arrSize = sizeof(data)/sizeof(data[0]);
   G4double res = data[0];
   if (arrSize == 0 ) return res;
   for(G4int i=1; i<arrSize; ++i){

@@ -12,8 +12,8 @@ public:
 
 	G4VPhysicalVolume* Construct();
 
-  G4double minG4(G4double* data);
-  G4double maxG4(G4double* data);
+  G4double minG4(G4double* data, G4int arrSize);
+  G4double maxG4(G4double* data, G4int arrSize);
 };
 
 #endif
