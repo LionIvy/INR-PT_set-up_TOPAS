@@ -1,0 +1,37 @@
+includeFile = Materials.txt
+
+s:Ge/contouredScatterer/Parent   = "World"
+s:Ge/contouredScatterer/Type     = "contouredScatterer"
+s:Ge/contouredScatterer/ScMaterial = "G4_Cu"
+i:Ge/contouredScatterer/NbOfScLayers = 3
+dv:Ge/contouredScatterer/ScLayersHL    = 24 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 0.05 mm
+dv:Ge/contouredScatterer/ScLayersRmax  = 24 8.50 9.36 10.11 10.80 11.48 12.17 12.89 13.64 14.42 15.22 15.22 16.01 16.80 17.55 18.26 18.93 19.55 20.14 20.73 21.37 22.10 23.01 24.20 25.81 mm
+
+d:Ge/contouredScatterer/DegrHLX  = 5.0 cm
+d:Ge/contouredScatterer/DegrHLY  = 5.0 cm
+s:Ge/contouredScatterer/DegrMaterial = "Lucite"
+i:Ge/contouredScatterer/NbOfDegLayers = 3
+dv:Ge/contouredScatterer/DegLayersHL  = 3 0.135 0.345 0.61 mm
+dv:Ge/contouredScatterer/DegLayersRmax = 3 2.69 5.38 8.07 mm
+
+# d:Ge/contouredScatterer/HLX
+s:Ge/contouredScatterer/DrawingStyle = "Solid"
+d:Ge/contouredScatterer/TransZ   = 15.5 cm
+
+
+
+
+
+
+dv:Ge/contouredScatterer/DegLayersHL   = 10 2.690 5.380 8.070 10.76 13.45 16.14 18.830 21.520 24.210 26.900
+dv:Ge/contouredScatterer/DegLayersRmax = 10 0.135 0.345 0.610 0.805 0.920 1.00 1.0200 0.9650  
+AirR[0]  = 2.69;   AirHeight[0]= 0.27;
+AirR[1]  = 5.38;   AirHeight[1]= 0.78;
+AirR[2]  = 8.07;   AirHeight[2]= 1.22;
+AirR[3]  = 10.76;  AirHeight[3]= 1.61;
+AirR[4]  = 13.45;  AirHeight[4]= 1.84;
+AirR[5]  = 16.14;  AirHeight[5]= 2.00;
+AirR[6]  = 18.83;  AirHeight[6]= 2.04;
+AirR[7]  = 21.52;  AirHeight[7]= 1.93;
+irR[8]  = 24.21;  AirHeight[8]= 1.74;
+AirR[9]  = 26.90;  AirHeight[9]= 0.7;

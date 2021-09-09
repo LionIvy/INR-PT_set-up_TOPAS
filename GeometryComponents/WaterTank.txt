@@ -15,12 +15,23 @@ s:Ge/wTank/Material = "G4_WATER"
 d:Ge/wTank/HLX      = 20.0 cm
 d:Ge/wTank/HLY      = 20.0 cm
 d:Ge/wTank/HLZ      = 20.0 cm
-i:Sc/wTank/XBins = 400
-i:Sc/wTank/YBins = 400
-i:Sc/wTank/ZBins = 400
 
-s:Sc/wTankScorer/Quantity = "DoseToMaterial"
-s:Sc/wTankScorer/Component = "wTank"
+
+s:Ge/SD_Tank/Parent   = "wTank"
+s:Ge/SD_Tank/Type     = "TsBox"
+s:Ge/SD_Tank/Material = "G4_WATER"
+d:Ge/SD_Tank/HLX      = 5.0 cm
+d:Ge/SD_Tank/HLY      = 5.0 cm
+d:Ge/SD_Tank/HLZ      = 15.0 cm
+d:Ge/SD_Tank/TransZ   = -5. cm
+i:Sc/SD_Tank/XBins = 10
+i:Sc/SD_Tank/YBins = 10
+i:Sc/SD_Tank/ZBins = 300
+
+# includeFile = GeometryComponents/VoxelMaterials.txt
+
+s:Sc/wTankScorer/Quantity = "DoseToMedium"
+s:Sc/wTankScorer/Component = "SD_Tank"
 s:Sc/wTankScorer/Material = "G4_WATER"
-s:Sc/wTank/OutputFile = "wTankDose.dat"
+s:Sc/wTank/OutputFile = "wTankDose.txt"
 S:Sc/wTankScorer/IfOutputFileAlreadyExists = "Overwrite"

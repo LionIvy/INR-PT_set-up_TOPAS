@@ -98,6 +98,13 @@ includeFile = GeometryComponents/graphite_Collimator.txt
 #---------------------------------------------------
 includeFile = GeometryComponents/primaryScatterer.txt
 
+
+#---------------------------------------------------
+#secondaryScatterer
+#---------------------------------------------------
+includeFile = GeometryComponents/contouredScatterer.txt
+
+
 #---------------------------------------------------
 #waterTank
 #---------------------------------------------------
@@ -140,11 +147,12 @@ d:Ge/BeamPosition/RotY=0. deg
 d:Ge/BeamPosition/RotZ=180. deg
 
 
-i:So/MySource/NumberOfHistoriesInRun = 100
+i:So/MySource/NumberOfHistoriesInRun = 1
 
 #===================================================
 # Overall TOPAS control
 #===================================================
 Ts/NumberOfThreads          = 0 # Change to 0 to use all available threads
 b:Ts/ShowCPUTime            = "True"
+Ts/UseQt = "True"
 b:Ts/PauseBeforeQuit        = Gr/Enable
