@@ -1,24 +1,9 @@
-# Graphics settings used in some demonstrations.
+iv:Gr/Color/TransparentRed  = 4 255 0 255 200
+iv:Gr/Color/TransparentBlue = 4 0 0 255 200
 
-includeFile = main.txt
-
-s:Gr/ViewA/Type                             = "OpenGL"
-i:Gr/ViewA/WindowSizeX                      = 900
-i:Gr/ViewA/WindowSizeY                      = 900
-d:Gr/ViewA/Theta                            = 90 deg
-d:Gr/ViewA/Phi                              = 0 deg
-s:Gr/ViewA/Projection                       = "Perspective"
-d:Gr/ViewA/PerspectiveAngle                 = 45 deg
-u:Gr/ViewA/Zoom                             = 1
-b:Gr/ViewA/HiddenLineRemovalForTrajectories = "False"
-#b:Gr/ViewA/IncludeAxes                      = "False"
-#s:Gr/ViewA/AxesComponent                    = "World"
-#d:Gr/ViewA/AxesSize                         = 0.1 m
-
-#b:Gr/ViewA/CopyOpenGLToEPS     = "True"
-b:Gr/ViewA/IncludeTrajectories = "True"
-
-s:Gr/ViewA/ColorBy      = "Charge"
-s:Gr/ViewA/ChargeColors = "red green cyan"
-# b:Ts/UseQt = "True"
-b:Ts/PauseBeforeQuit = "True"
+s:Gr/ViewA/Type              = "OpenGL"
+i:Gr/ViewA/WindowSizeX       = 1400
+i:Gr/ViewA/WindowSizeY       = 700
+u:Gr/ViewA/Zoom              = 2.0
+d:Gr/ViewA/Theta             = 90 deg
+d:Gr/ViewA/Phi               = 0 deg

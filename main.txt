@@ -10,16 +10,15 @@ i:Gr/ViewA/WindowSizeY       = 700
 u:Gr/ViewA/Zoom              = 2.0
 d:Gr/ViewA/Theta             = 90 deg
 d:Gr/ViewA/Phi               = 0 deg
-#b:Gr/ViewA/IncludeAxes       = "True"
-#d:Gr/ViewA/AxesSize          = 10 cm
-
+#includeFile = Viewer.txt
 #===================================================
 # Geometry
 #===================================================
-
 b:Ge/CheckForOverlaps       = "True"
 includeFile = Materials.txt
-
+#---------------------------------------------------
+# World
+#---------------------------------------------------
 
 d:Ge/World/HLX = 3.0 m
 d:Ge/World/HLY = 3.0 m
@@ -27,7 +26,7 @@ d:Ge/World/HLZ = 7.0 m
 s:Ge/World/Material = "Air"
 s:Ge/World/DrawingStyle = "FullWireFrame"
 #---------------------------------------------------
-#BeamPipe
+# BeamPipe
 #---------------------------------------------------
 s:Ge/BeamPipeBody/Parent    = "World"
 s:Ge/BeamPipeBody/Type = "TsCylinder"
@@ -92,25 +91,18 @@ s:Ge/PolyCarbon/DrawingStyle = "Solid"
 # graphiteCollimator
 #---------------------------------------------------
 includeFile = GeometryComponents/graphite_Collimator.txt
-
 #---------------------------------------------------
 #primaryScatterer
 #---------------------------------------------------
 includeFile = GeometryComponents/primaryScatterer.txt
-
-
 #---------------------------------------------------
 #secondaryScatterer
 #---------------------------------------------------
 includeFile = GeometryComponents/contouredScatterer.txt
-
-
 #---------------------------------------------------
 #waterTank
 #---------------------------------------------------
 includeFile = GeometryComponents/WaterTank.txt
-
-
 #===================================================
 # Physics
 #===================================================
@@ -147,12 +139,16 @@ d:Ge/BeamPosition/RotY=0. deg
 d:Ge/BeamPosition/RotZ=180. deg
 
 
-i:So/MySource/NumberOfHistoriesInRun = 1
+
 
 #===================================================
 # Overall TOPAS control
 #===================================================
 Ts/NumberOfThreads          = 0 # Change to 0 to use all available threads
 b:Ts/ShowCPUTime            = "True"
-Ts/UseQt = "True"
+i:Ts/RunVerbosity = 0
+i:Ts/ShowHistoryCountAtInterval = 1
+i:So/MySource/NumberOfHistoriesInRun = 100
+b:Gr/Enable = "False"
+# Ts/UseQt = "True"
 b:Ts/PauseBeforeQuit        = Gr/Enable

@@ -20,18 +20,25 @@ d:Ge/wTank/HLZ      = 20.0 cm
 s:Ge/SD_Tank/Parent   = "wTank"
 s:Ge/SD_Tank/Type     = "TsBox"
 s:Ge/SD_Tank/Material = "G4_WATER"
-d:Ge/SD_Tank/HLX      = 5.0 cm
-d:Ge/SD_Tank/HLY      = 5.0 cm
+d:Ge/SD_Tank/HLX      = 3.0 cm
+d:Ge/SD_Tank/HLY      = 3.0 cm
 d:Ge/SD_Tank/HLZ      = 15.0 cm
 d:Ge/SD_Tank/TransZ   = -5. cm
-i:Sc/SD_Tank/XBins = 10
-i:Sc/SD_Tank/YBins = 10
-i:Sc/SD_Tank/ZBins = 300
+#
+# X binning causes creation of a parallel world for scoring
+s:Sc/DoseAtPhantomParallel/Quantity                   = "DoseToMedium"
+s:Sc/DoseAtPhantomParallel/Component                  = "SD_Tank"
+b:Sc/DoseAtPhantomParallel/OutputToConsole            = "FALSE"
+s:Sc/DoseAtPhantomParallel/IfOutputFileAlreadyExists  = "Overwrite"
+i:Sc/DoseAtPhantomParallel/XBins                      = 60
+i:Sc/DoseAtPhantomParallel/YBins                      = 60
+i:Sc/DoseAtPhantomParallel/ZBins                      = 300
+s:Sc/DoseAtPhantomParallel/OutputFile = "DoseInPhantom"
 
 # includeFile = GeometryComponents/VoxelMaterials.txt
 
-s:Sc/wTankScorer/Quantity = "DoseToMedium"
-s:Sc/wTankScorer/Component = "SD_Tank"
-s:Sc/wTankScorer/Material = "G4_WATER"
-s:Sc/wTank/OutputFile = "wTankDose.txt"
-S:Sc/wTankScorer/IfOutputFileAlreadyExists = "Overwrite"
+# s:Sc/wTankScorer/Quantity = "DoseToMedium"
+# s:Sc/wTankScorer/Component = "SD_Tank"
+# s:Sc/wTankScorer/Material = "G4_WATER"
+# s:Sc/wTank/OutputFile = "wTankDose.txt"
+# S:Sc/wTankScorer/IfOutputFileAlreadyExists = "Overwrite"
