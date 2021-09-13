@@ -1,0 +1,26 @@
+s:Ge/PhSp1/Type     = "TsBox"
+s:Ge/PhSp1/Parent   = "World"
+s:Ge/PhSp1/Material = "G4_AIR"
+d:Ge/PhSp1/HLX      = 50.0 cm
+d:Ge/PhSp1/HLY      = 50.0 cm
+d:Ge/PhSp1/HLZ      = 1.0 mm
+d:Ge/PhSp1/TransZ   = 20. cm
+s:Ge/PhSp1/Color    = "skyblue"
+
+s:Sc/PhaseSpaceAtFilm/Quantity                    = "PhaseSpace"
+b:Sc/PhaseSpaceAtFilm/OutputToConsole             = "False"
+s:Sc/PhaseSpaceAtFilm/Surface                     = "PhSp1/ZMinusSurface"
+s:Sc/PhaseSpaceAtFilm/OutputType                  = "Binary" # ASCII, Binary, Limited or ROOT
+s:Sc/PhaseSpaceAtFilm/OutputFile                  = "BinaryOutput"
+i:Sc/PhaseSpaceAtFilm/OutputBufferSize            = 1000
+#s:Sc/PhaseSpaceAtFilm/OnlyIncludeParticlesGoing  = "In"
+b:Sc/PhaseSpaceAtFilm/IncludeTOPASTime            = "True"
+b:Sc/PhaseSpaceAtFilm/IncludeTimeOfFlight         = "True"
+b:Sc/PhaseSpaceAtFilm/IncludeRunID                = "True"
+b:Sc/PhaseSpaceAtFilm/IncludeEventID              = "True"
+b:Sc/PhaseSpaceAtFilm/IncludeTrackID              = "True"
+b:Sc/PhaseSpaceAtFilm/IncludeParentID             = "True"
+b:Sc/PhaseSpaceAtFilm/IncludeVertexInfo           = "True"
+b:Sc/PhaseSpaceAtFilm/IncludeSeed                 = "True"
+#sv:Sc/PhaseSpaceAtFilm/OnlyIncludeParticlesNamed = 1 "Proton"
+s:Sc/PhaseSpaceAtFilm/IfOutputFileAlreadyExists   = "Overwrite"

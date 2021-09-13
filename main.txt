@@ -86,15 +86,15 @@ d:Ge/Wall/HLY = 2.0  m
 d:Ge/Wall/HLZ = 60.0 cm
 d:Ge/Wall/RMin = 0. mm
 d:Ge/Wall/RMax = 10. cm
-d:Ge/Wall/HoleRotY = 0.3764 rad
-d:Ge/Wall/RotY = 0.3764 rad
-d:Ge/Wall/TransZ = -70.15 cm
+d:Ge/Wall/HoleRotY = 0.05 rad #0.3764 rad
+d:Ge/Wall/RotY = 0.05 rad #0.3764 rad
+d:Ge/Wall/TransZ = -67.15 cm
 s:Ge/Wall/DrawingStyle = "FullWireFrame"#"Solid"
 
 s:Ge/MetalTube/Parent = "World"
 s:Ge/MetalTube/Type = "TsCylinder"
 s:Ge/MetalTube/Material = "Steel"
-d:Ge/MetalTube/HL   = 70.15 cm
+d:Ge/MetalTube/HL   = 64.15 cm
 d:Ge/MetalTube/RMin = 5. cm
 d:Ge/MetalTube/RMax = Ge/Wall/RMax cm
 d:Ge/MetalTube/TransZ = Ge/Wall/TransZ  cm
@@ -108,11 +108,43 @@ d:Ge/PolyCarbon/RMin = Ge/MetalTube/RMin + 5. mm
 d:Ge/PolyCarbon/RMax = Ge/MetalTube/RMax - 5. mm
 s:Ge/PolyCarbon/DrawingStyle = "Solid"
 
-
+#---------------------------------------------------
 #secondaryScatterer
 #---------------------------------------------------
 includeFile = GeometryComponents/contouredScatterer.txt
 d:Ge/contouredScatterer/TransZ   = 10.5 cm
+#---------------------------------------------------
+# PhaseSpace 1
+#---------------------------------------------------
+#includeFile = PhaseSpace/PhSp_2ndScatterer.txt
+
+s:Ge/PhSp1/Type     = "TsBox"
+s:Ge/PhSp1/Parent   = "World"
+s:Ge/PhSp1/Material = "G4_AIR"
+d:Ge/PhSp1/HLX      = 50.0 cm
+d:Ge/PhSp1/HLY      = 50.0 cm
+d:Ge/PhSp1/HLZ      = 1.0 mm
+d:Ge/PhSp1/TransZ   = 20. cm
+s:Ge/PhSp1/Color    = "skyblue"
+
+s:Sc/PhaseSpaceAtFilm/Quantity                    = "PhaseSpace"
+b:Sc/PhaseSpaceAtFilm/OutputToConsole             = "False"
+s:Sc/PhaseSpaceAtFilm/Surface                     = "PhSp1/ZMinusSurface"
+s:Sc/PhaseSpaceAtFilm/OutputType                  = "Binary" # ASCII, Binary, Limited or ROOT
+s:Sc/PhaseSpaceAtFilm/OutputFile                  = "BinaryOutput"
+i:Sc/PhaseSpaceAtFilm/OutputBufferSize            = 1000000000
+#s:Sc/PhaseSpaceAtFilm/OnlyIncludeParticlesGoing  = "In"
+b:Sc/PhaseSpaceAtFilm/IncludeTOPASTime            = "True"
+b:Sc/PhaseSpaceAtFilm/IncludeTimeOfFlight         = "True"
+b:Sc/PhaseSpaceAtFilm/IncludeRunID                = "True"
+b:Sc/PhaseSpaceAtFilm/IncludeEventID              = "True"
+b:Sc/PhaseSpaceAtFilm/IncludeTrackID              = "True"
+b:Sc/PhaseSpaceAtFilm/IncludeParentID             = "True"
+b:Sc/PhaseSpaceAtFilm/IncludeVertexInfo           = "True"
+b:Sc/PhaseSpaceAtFilm/IncludeSeed                 = "True"
+#sv:Sc/PhaseSpaceAtFilm/OnlyIncludeParticlesNamed = 1 "Proton"
+s:Sc/PhaseSpaceAtFilm/IfOutputFileAlreadyExists   = "Overwrite"
+
 #---------------------------------------------------
 #waterTank
 #---------------------------------------------------
@@ -162,8 +194,8 @@ d:Ge/BeamPosition/RotZ=180. deg
 Ts/NumberOfThreads          = 0 # Change to 0 to use all available threads
 b:Ts/ShowCPUTime            = "True"
 i:Ts/RunVerbosity = 0
-i:Ts/ShowHistoryCountAtInterval = 1
-i:So/MySource/NumberOfHistoriesInRun = 1
+i:Ts/ShowHistoryCountAtInterval = 10000
+i:So/MySource/NumberOfHistoriesInRun = 1000000
 #b:Gr/Enable = "False"
-Ts/UseQt = "True"
+#Ts/UseQt = "True"
 b:Ts/PauseBeforeQuit        = Gr/Enable
