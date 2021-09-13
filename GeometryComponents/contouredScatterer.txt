@@ -18,4 +18,3 @@ dv:Ge/contouredScatterer/DegLayersHL     = 10 0.135 0.345 0.610 0.805 0.920 1.00
 
 # d:Ge/contouredScatterer/HLX
 s:Ge/contouredScatterer/DrawingStyle = "Solid"
-d:Ge/contouredScatterer/TransZ   = 15.5 cm

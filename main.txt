@@ -10,6 +10,15 @@ i:Gr/ViewA/WindowSizeY       = 700
 u:Gr/ViewA/Zoom              = 2.0
 d:Gr/ViewA/Theta             = 90 deg
 d:Gr/ViewA/Phi               = 0 deg
+
+s:Gr/ViewB/Type              = "OpenGL"
+i:Gr/ViewB/WindowSizeX       = 1400
+i:Gr/ViewB/WindowSizeY       = 700
+u:Gr/ViewB/Zoom              = 2.0
+d:Gr/ViewB/Theta             = 45 deg
+d:Gr/ViewB/Phi               = 45 deg
+
+
 #includeFile = Viewer.txt
 #===================================================
 # Geometry
@@ -22,7 +31,7 @@ includeFile = Materials.txt
 
 d:Ge/World/HLX = 3.0 m
 d:Ge/World/HLY = 3.0 m
-d:Ge/World/HLZ = 7.0 m
+d:Ge/World/HLZ = 8.0 m
 s:Ge/World/Material = "Air"
 s:Ge/World/DrawingStyle = "FullWireFrame"
 #---------------------------------------------------
@@ -32,13 +41,13 @@ s:Ge/BeamPipeBody/Parent    = "World"
 s:Ge/BeamPipeBody/Type = "TsCylinder"
 s:Ge/BeamPipeBody/Material = "Vacuum"
 d:Ge/BeamPipeBody/RMin         =    0. mm
-d:Ge/BeamPipeBody/RMax         =   10. cm
-d:Ge/BeamPipeBody/HL           =   10. cm
+d:Ge/BeamPipeBody/RMax         =    3. cm
+d:Ge/BeamPipeBody/HL           =   2.5 cm
 d:Ge/BeamPipeBody/SPhi         =    0. deg
 d:Ge/BeamPipeBody/DPhi         =  360. deg
 d:Ge/BeamPipe/BodyTransX       =    0. m
 d:Ge/BeamPipeBody/TransY       =    0. m
-d:Ge/BeamPipeBody/TransZ       =  Ge/BeamPipeBody/HL - Ge/World/HLZ m
+d:Ge/BeamPipeBody/TransZ       =  -411. cm
 s:Ge/BeamPipeBody/Color = "red"
 s:Ge/BeamPipeBody/DrawingStyle = "FullWireFrame"
 
@@ -55,6 +64,18 @@ s:Ge/ExitWindow/Color = "skyblue"
 s:Ge/ExitWindow/DrawingStyle = "Solid"
 
 #---------------------------------------------------
+# graphiteCollimator
+#---------------------------------------------------
+includeFile = GeometryComponents/graphite_Collimator.txt
+d:Ge/graphiteCollimator/TransZ   = -340.0 cm
+#---------------------------------------------------
+#primaryScatterer
+#---------------------------------------------------
+includeFile = GeometryComponents/primaryScatterer.txt
+d:Ge/primaryScatterer/TransZ   = -325.25 cm
+#---------------------------------------------------
+
+#---------------------------------------------------
 #Wall
 #---------------------------------------------------
 s:Ge/Wall/Parent = "World"
@@ -67,7 +88,7 @@ d:Ge/Wall/RMin = 0. mm
 d:Ge/Wall/RMax = 10. cm
 d:Ge/Wall/HoleRotY = 0.3764 rad
 d:Ge/Wall/RotY = 0.3764 rad
-d:Ge/Wall/TransZ = -64. cm
+d:Ge/Wall/TransZ = -70.15 cm
 s:Ge/Wall/DrawingStyle = "FullWireFrame"#"Solid"
 
 s:Ge/MetalTube/Parent = "World"
@@ -87,26 +108,20 @@ d:Ge/PolyCarbon/RMin = Ge/MetalTube/RMin + 5. mm
 d:Ge/PolyCarbon/RMax = Ge/MetalTube/RMax - 5. mm
 s:Ge/PolyCarbon/DrawingStyle = "Solid"
 
-#---------------------------------------------------
-# graphiteCollimator
-#---------------------------------------------------
-includeFile = GeometryComponents/graphite_Collimator.txt
-#---------------------------------------------------
-#primaryScatterer
-#---------------------------------------------------
-includeFile = GeometryComponents/primaryScatterer.txt
-#---------------------------------------------------
+
 #secondaryScatterer
 #---------------------------------------------------
 includeFile = GeometryComponents/contouredScatterer.txt
+d:Ge/contouredScatterer/TransZ   = 10.5 cm
 #---------------------------------------------------
 #waterTank
 #---------------------------------------------------
 includeFile = GeometryComponents/WaterTank.txt
+d:Ge/wTankBody/TransZ   = 257. cm
 #===================================================
 # Physics
 #===================================================
-sv:Ph/Default/Modules       = 1 "g4em-standard_opt4"
+sv:Ph/Default/Modules       = 1 "g4em-standard_opt0"
 
 #===================================================
 # Beam
@@ -118,8 +133,8 @@ d:So/MySource/BeamEnergy = 209.0 MeV
 u:So/MySource/BeamEnergySpread = 0.757504
 s:So/MySource/BeamPositionDistribution = "Gaussian" # None, Flat or Gaussian
 s:So/MySource/BeamPositionCutoffShape = "Ellipse" # Rectangle or Ellipse (if Flat or Gaussian)
-d:So/MySource/BeamPositionCutoffX = 10. cm # X extent of position (if Flat or Gaussian)
-d:So/MySource/BeamPositionCutoffY = 10. cm # Y extent of position (if Flat or Gaussian)
+d:So/MySource/BeamPositionCutoffX = 3. cm # X extent of position (if Flat or Gaussian)
+d:So/MySource/BeamPositionCutoffY = 3. cm # Y extent of position (if Flat or Gaussian)
 d:So/MySource/BeamPositionSpreadX = 0.65 cm # distribution (if Gaussian)
 d:So/MySource/BeamPositionSpreadY = 0.65 cm # distribution (if Gaussian)
 s:So/MySource/BeamAngularDistribution = "Gaussian" # None, Flat or Gaussian
@@ -148,7 +163,7 @@ Ts/NumberOfThreads          = 0 # Change to 0 to use all available threads
 b:Ts/ShowCPUTime            = "True"
 i:Ts/RunVerbosity = 0
 i:Ts/ShowHistoryCountAtInterval = 1
-i:So/MySource/NumberOfHistoriesInRun = 100
-b:Gr/Enable = "False"
-# Ts/UseQt = "True"
+i:So/MySource/NumberOfHistoriesInRun = 1
+#b:Gr/Enable = "False"
+Ts/UseQt = "True"
 b:Ts/PauseBeforeQuit        = Gr/Enable

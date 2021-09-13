@@ -6,7 +6,6 @@ s:Ge/graphiteCollimator/Material = "Carbon"
 d:Ge/graphiteCollimator/HLX      = 7.5 cm
 d:Ge/graphiteCollimator/HLY      = 7.5 cm
 d:Ge/graphiteCollimator/HLZ      = 13.75 cm
-d:Ge/graphiteCollimator/TransZ   = -646.25 cm
 s:Ge/graphiteCollimator/Color = "gray"
 
 s:Ge/graphiteCollimatorHole/Parent   = "graphiteCollimator"

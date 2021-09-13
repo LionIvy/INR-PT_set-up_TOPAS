@@ -6,7 +6,7 @@ s:Ge/wTankBody/Material = "Lucite"
 d:Ge/wTankBody/HLX      = 20.5 cm
 d:Ge/wTankBody/HLY      = 20.5 cm
 d:Ge/wTankBody/HLZ      = 20.5 cm
-d:Ge/wTankBody/TransZ   = 300. cm
+
 s:Ge/wTankBody/DrawingStyle = "WireFrame"
 
 s:Ge/wTank/Parent   = "wTankBody"
