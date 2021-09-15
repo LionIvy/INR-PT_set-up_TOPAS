@@ -68,11 +68,13 @@ s:Ge/ExitWindow/DrawingStyle = "Solid"
 #---------------------------------------------------
 includeFile = GeometryComponents/graphite_Collimator.txt
 d:Ge/graphiteCollimator/TransZ   = -340.0 cm
+
 #---------------------------------------------------
 #primaryScatterer
 #---------------------------------------------------
 includeFile = GeometryComponents/primaryScatterer.txt
 d:Ge/primaryScatterer/TransZ   = -325.25 cm
+
 #---------------------------------------------------
 
 #---------------------------------------------------
