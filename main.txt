@@ -153,11 +153,18 @@ d:Ge/wTankBody/TransZ   = 257. cm
 #===================================================
 # Physics
 #===================================================
-sv:Ph/Default/Modules       = 1 "g4em-standard_opt0"
+sv:Ph/Default/Modules       = 1 "g4em-standard_opt4"
 
 #===================================================
 # Beam
 #===================================================
+
+# s:So/Example/Type                            = "PhaseSpace"
+# s:So/Example/PhaseSpaceFileName              = "BinaryOutput"
+# s:So/Example/Component                       = "World"
+# #i:So/Example/PhaseSpaceMultipleUse          = 2
+# b:So/Example/PhaseSpaceIncludeEmptyHistories = "True"
+
 s:So/MySource/Type = "Beam" # Beam, Isotropic, Emittance or PhaseSpace
 s:So/MySource/Component = "BeamPosition"
 s:So/MySource/BeamParticle = "proton"
@@ -184,8 +191,8 @@ d:Ge/BeamPosition/TransZ= 0. m
 d:Ge/BeamPosition/RotX=0. deg
 d:Ge/BeamPosition/RotY=0. deg
 d:Ge/BeamPosition/RotZ=180. deg
-
-
+#
+#
 
 
 #===================================================
@@ -195,7 +202,7 @@ Ts/NumberOfThreads          = 0 # Change to 0 to use all available threads
 b:Ts/ShowCPUTime            = "True"
 i:Ts/RunVerbosity = 0
 i:Ts/ShowHistoryCountAtInterval = 10000
-i:So/MySource/NumberOfHistoriesInRun = 1000000
-#b:Gr/Enable = "False"
+i:So/MySource/NumberOfHistoriesInRun = 100000000
+b:Gr/Enable = "False"
 #Ts/UseQt = "True"
 b:Ts/PauseBeforeQuit        = Gr/Enable
