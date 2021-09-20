@@ -1,0 +1,11 @@
+includeFile = Materials.txt
+
+s:Ge/RidgeFilter/Parent   = "World"
+s:Ge/RidgeFilter/Type     = "RidgeFilter"
+s:Ge/RidgeFilter/Material = "Lucite"
+i:Ge/RidgeFilter/NumberOfRidges  = 9
+dv:Ge/RidgeFilter/HeightOfRidges = 9 5.0 10.0 15.0 20.0 25.0 30.0 35.0 40.0 45.0 mm
+dv:Ge/RidgeFilter/WidthOfRidges  = 9 1.0 1.10 0.70 0.70 0.50 0.50 0.40 0.40 0.50 mm
+d:Ge/RidgeFilter/LenghtOfRidges = 100. mm
+i:Ge/RidgeFilter/NumberOfModules = 10
+d:Ge/RidgeFilter/DistanceBetweenModules = 4.2 mm
