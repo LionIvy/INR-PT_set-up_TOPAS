@@ -33,7 +33,7 @@ s:Sc/DoseAtPhantomParallel/IfOutputFileAlreadyExists  = "Overwrite"
 i:Sc/DoseAtPhantomParallel/XBins                      = 60
 i:Sc/DoseAtPhantomParallel/YBins                      = 60
 i:Sc/DoseAtPhantomParallel/ZBins                      = 300
-s:Sc/DoseAtPhantomParallel/OutputFile = "DoseInPhantom"
+s:Sc/DoseAtPhantomParallel/OutputFile = "Results/DoseInPhantom"
 
 # includeFile = GeometryComponents/VoxelMaterials.txt
 

@@ -132,10 +132,10 @@ s:Ge/PhSp1/Color    = "skyblue"
 s:Sc/PhaseSpaceAtFilm/Quantity                    = "PhaseSpace"
 b:Sc/PhaseSpaceAtFilm/OutputToConsole             = "False"
 s:Sc/PhaseSpaceAtFilm/Surface                     = "PhSp1/ZMinusSurface"
-#s:Sc/PhaseSpaceAtFilm/OutputType                  = "Binary" # ASCII, Binary, Limited or ROOT
-#s:Sc/PhaseSpaceAtFilm/OutputFile                  = "BinaryOutput"
-s:Sc/PhaseSpaceAtVacFilm/OutputType                  = "ROOT" # ASCII, Binary, Limited or ROOT
-s:Sc/PhaseSpaceAtVacFilm/OutputFile                  = "ROOTOutput"
+s:Sc/PhaseSpaceAtFilm/OutputType                  = "Binary" # ASCII, Binary, Limited or ROOT
+s:Sc/PhaseSpaceAtFilm/OutputFile                  = "Results/BinaryOutput"
+#s:Sc/PhaseSpaceAtVacFilm/OutputType                  = "ROOT" # ASCII, Binary, Limited or ROOT
+#s:Sc/PhaseSpaceAtVacFilm/OutputFile                  = "ROOTOutput"
 i:Sc/PhaseSpaceAtFilm/OutputBufferSize            = 1000000000
 s:Sc/PhaseSpaceAtFilm/OnlyIncludeParticlesGoing  = "In"
 b:Sc/PhaseSpaceAtFilm/IncludeTOPASTime            = "True"
@@ -147,7 +147,7 @@ b:Sc/PhaseSpaceAtFilm/IncludeParentID             = "True"
 b:Sc/PhaseSpaceAtFilm/IncludeVertexInfo           = "True"
 b:Sc/PhaseSpaceAtFilm/IncludeSeed                 = "True"
 #sv:Sc/PhaseSpaceAtFilm/OnlyIncludeParticlesNamed = 1 "Proton"
-s:Sc/PhaseSpaceAtFilm/IfOutputFileAlreadyExists   = "Overwrite"
+s:Sc/PhaseSpaceAtFilm/IfOutputFileAlreadyExists   = "Increment" # "Overwrite"
 
 #---------------------------------------------------
 # Ridgefilter
@@ -215,7 +215,7 @@ Ts/NumberOfThreads          = 0 # Change to 0 to use all available threads
 b:Ts/ShowCPUTime            = "True"
 i:Ts/RunVerbosity = 0
 i:Ts/ShowHistoryCountAtInterval = 10000
-i:So/MySource/NumberOfHistoriesInRun = 10
-#b:Gr/Enable = "False"
-Ts/UseQt = "True"
+i:So/MySource/NumberOfHistoriesInRun = 1000000
+b:Gr/Enable = "False"
+#Ts/UseQt = "True"
 b:Ts/PauseBeforeQuit        = Gr/Enable

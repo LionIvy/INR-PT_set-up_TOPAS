@@ -78,7 +78,7 @@ G4VPhysicalVolume* RidgeFilter::Construct()
     G4double ElemPositionX;
     G4double ElemPositionZ;
     G4ThreeVector* pos;
-    G4cout<<"BlockWidth " << BlockWidth  <<" cm" <<G4endl;
+  //  G4cout<<"BlockWidth " << BlockWidth  <<" cm" <<G4endl;
 
 
     for (int i = 0; i < NumberOfModules; ++i){
@@ -87,7 +87,7 @@ G4VPhysicalVolume* RidgeFilter::Construct()
             for (int j=0; j < NumberOfRidges; ++j){
                 ElemPositionX+=0.5*WidthOfRidges[j];
                 ElemPositionZ=-HLZ+0.5*HeightOfRidges[j];
-                G4cout<<"ElemPositionX " << ElemPositionX  <<" cm" <<"== ElemPositionZ " << ElemPositionZ  <<" cm" <<G4endl;
+              //  G4cout<<"ElemPositionX " << ElemPositionX  <<" cm" <<"== ElemPositionZ " << ElemPositionZ  <<" cm" <<G4endl;
                 G4Box* sRidge = new G4Box("RidgeF", WidthOfRidges[j]*0.5, LenghtOfRidges*0.5, HeightOfRidges[j]*0.5);
                 G4LogicalVolume* lRidge = CreateLogicalVolume("RidgeF", RFMaterial, sRidge);
                 lRidge -> SetVisAttributes(lblue);
