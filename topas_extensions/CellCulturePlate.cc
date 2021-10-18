@@ -51,6 +51,7 @@ G4VPhysicalVolume* CellCulturePlate::Construct()
   //================================================================================
   // Fetch geometry parametrs
   //================================================================================
+
 	G4int			numberOfPlates		= fPm -> GetIntegerParameter( GetFullParmName("numberOfPlates") );
 	G4double	plateWidth				= fPm -> GetDoubleParameter ( GetFullParmName("plateWidth"), "Length");
   G4double	plateLength				= fPm -> GetDoubleParameter ( GetFullParmName("plateLength"), "Length");
@@ -64,6 +65,14 @@ G4VPhysicalVolume* CellCulturePlate::Construct()
   G4double wellsInnerDiametr	= fPm -> GetDoubleParameter ( GetFullParmName("wellsInnerDiametr"), "Length");
 	G4double wellsOuterDiametr	= fPm -> GetDoubleParameter ( GetFullParmName("wellsOuterDiametr"), "Length");
   G4double gapBetweenWells		= fPm -> GetDoubleParameter ( GetFullParmName("gapBetweenWells"), "Length");
+
+	// try{
+	// 	int a = 1;
+	// 	wellsAreSolid 					= fPm -> GetBooleanParameter(	GetFullParmName("ShowWellsAsSolid"));
+	// }
+	// catch(int a){
+	// 	wellsAreSolid 					= false;
+	// }
 
 // 	G4double wellsOutersDiametr = *0.5 + 1.1*mm
 // wellsInnerDiametr*0.5 + 1.1*mm
@@ -147,71 +156,41 @@ if(dY < 0){
 G4double wellPositionX, wellPositionY;
 G4double wellPositionZ = 0. *mm;
 G4ThreeVector* pos;
+plateBox = new G4Box("plateBox", 0.5 * plateWidth, 0.5 * plateLength, 0.5 * plateHeigth);
+plateBoxLog = CreateLogicalVolume("logicPlateBox", CCPMaterial, plateBox);
+plateBoxLog -> SetVisAttributes(yellowWire);
+
+emptyBox = new G4Box("emptyBox", 0.5 * wellsAreaX, 0.5 * wellsAreaY, 0.5 * wellsAreaZ);
+//CreateLogicalVolume("RidgeF", RFMaterial, sRidge);
+//G4LogicalVolume* plateBoxLog = new G4LogicalVolume(plateBox, CCPMaterial, "logicPlateBox", 0., 0., 0.);
+emptyBoxLog = CreateLogicalVolume("logicEmptyBox", envelopeMaterialName, emptyBox);
+emptyBoxLog -> SetVisAttributes(whiteWire);
+sWell = new G4Tubs("Well", wellsInnerDiametr*0.5, wellsOuterDiametr*0.5, wellsHeight*0.5, 0., 360*deg);
+lWell = CreateLogicalVolume("Well", CCPMaterial, sWell);
+lWell -> SetVisAttributes(yellowWire);
+
 for (G4int plateNum = 0; plateNum < numberOfPlates; ++plateNum){
-	plateBox = new G4Box("plateBox", 0.5 * plateWidth, 0.5 * plateLength, 0.5 * plateHeigth);
-	//CreateLogicalVolume("RidgeF", RFMaterial, sRidge);
-	//G4LogicalVolume* plateBoxLog = new G4LogicalVolume(plateBox, CCPMaterial, "logicPlateBox", 0., 0., 0.);
-	plateBoxLog = CreateLogicalVolume("logicPlateBox", CCPMaterial, plateBox);
-	plateBoxPhys = new G4PVPlacement(0,
-																					G4ThreeVector(0, 0, -HLZ + 0.5 * plateHeigth + plateNum * plateHeigth),
-																					"physicalPlateBox",
-																					plateBoxLog,
-																					fEnvelopePhys,false,0);
-	plateBoxLog -> SetVisAttributes(yellowWire);
+	plateBoxPhys = new G4PVPlacement(0,G4ThreeVector(0, 0, -HLZ + 0.5 * plateHeigth + plateNum * plateHeigth),
+																		"physicalPlateBox",
+																		plateBoxLog,
+																		fEnvelopePhys,false,0);
 
-
-	emptyBox = new G4Box("emptyBox", 0.5 * wellsAreaX, 0.5 * wellsAreaY, 0.5 * wellsAreaZ);
-	//CreateLogicalVolume("RidgeF", RFMaterial, sRidge);
-	//G4LogicalVolume* plateBoxLog = new G4LogicalVolume(plateBox, CCPMaterial, "logicPlateBox", 0., 0., 0.);
-	emptyBoxLog = CreateLogicalVolume("logicEmptyBox", envelopeMaterialName, emptyBox);
 	emptyBoxPhys = new G4PVPlacement(0,
 																					G4ThreeVector(0, 0, 0),
 																					"physicalEmptyBox",
 																					emptyBoxLog,
 																					plateBoxPhys,false,0);
-	emptyBoxLog -> SetVisAttributes(whiteWire);
 
 	for (G4int col = 0; col < numberOfColumns; ++col){
 	    wellPositionX =  -0.5 * wellsAreaX + dX + 0.5 * wellsOuterDiametr + (wellsOuterDiametr + gapBetweenWells) * col;
 	        for (G4int row = 0; row < numberOfRows; ++row){
 	            wellPositionY =  -0.5 * wellsAreaY + dY + 0.5 * wellsOuterDiametr + (wellsOuterDiametr + gapBetweenWells) * row;
-	            sWell = new G4Tubs("Well", wellsInnerDiametr*0.5, wellsOuterDiametr*0.5, wellsHeight*0.5, 0., 360*deg);
-	            lWell = CreateLogicalVolume("Well", CCPMaterial, sWell);
-	            lWell -> SetVisAttributes(yellowWire);
 							pos = new G4ThreeVector(wellPositionX, wellPositionY, wellPositionZ);
 	            CreatePhysicalVolume("CCPWell", wellNum, true, lWell, 0, pos, emptyBoxPhys);
 	            wellNum++;
 	        }
 	 }
-
 }
-
-
-		//
-    // G4double WellPositionX = -HLX+plateWidth + 0.5*wellsInnerDiametr;
-    // G4double WellPositionY = -HLY+plateLength + 0.5*wellsInnerDiametr;
-    // G4double ElemPositionX;
-    // G4double ElemPositionY;
-    // G4double ElemPositionZ;
-    // G4ThreeVector* pos;
-		//
-		// ElemPositionZ=-HLZ+0.5*wellsHeight;
-    // for (int i = 0; i < numberOfColumns; ++i){
-    //     ElemPositionX =  WellPositionX + i*0.5*wellsInnerDiametr + gapBetweenWells;
-    //         for (int j=0; j < numberOfRows; ++j){
-    //             ElemPositionY+= WellPositionY + j*0.5*wellsInnerDiametr + gapBetweenWells;
-		//
-    //             //G4cout<<"ElemPositionX " << ElemPositionX  <<" cm" <<"== ElemPositionZ " << ElemPositionZ  <<" cm" <<G4endl;
-    //             G4Tubs* sWell = new G4Tubs("Well", wellsInnerDiametr*0.5, wellsInnerDiametr*0.5 + 1.1*mm, wellsHeight*0.5, 0., 360*deg); //тут углы дописать
-		//
-    //             G4LogicalVolume* lWell = CreateLogicalVolume("Well", CCPMaterial, sWell);
-    //             lWell -> SetVisAttributes(lblue);
-    //             pos = new G4ThreeVector(ElemPositionX, ElemPositionY, ElemPositionZ);
-    //             CreatePhysicalVolume("CCPWell", BNum, true, lWell, 0, pos, fEnvelopePhys);
-    //             BNum++;
-    //         }
-    //  }
-
 
 	InstantiateChildren(fEnvelopePhys);
 
