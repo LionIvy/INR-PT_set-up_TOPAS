@@ -13,27 +13,63 @@ s:Ge/wTank/Parent   = "wTankBody"
 s:Ge/wTank/Type     = "TsBox"
 s:Ge/wTank/Material = "G4_WATER"
 d:Ge/wTank/HLX      = 20.0 cm
-d:Ge/wTank/HLY      = 20.0 cm
+d:Ge/wTank/HLY      = 20.25 cm
 d:Ge/wTank/HLZ      = 20.0 cm
+d:Ge/wTank/TransY     = 0.25 cm
+#s:Ge/wTank/DrawingStyle = "Solid"
 
 
 s:Ge/SD_Tank/Parent   = "wTank"
 s:Ge/SD_Tank/Type     = "TsBox"
 s:Ge/SD_Tank/Material = "G4_WATER"
-d:Ge/SD_Tank/HLX      = 3.0 cm
-d:Ge/SD_Tank/HLY      = 3.0 cm
+d:Ge/SD_Tank/HLX      = 5.0 cm
+d:Ge/SD_Tank/HLY      = 5.0 cm
 d:Ge/SD_Tank/HLZ      = 15.0 cm
 d:Ge/SD_Tank/TransZ   = -5. cm
 #
 # X binning causes creation of a parallel world for scoring
+s:Sc/Edep/Quantity                   = "EnergyDeposit" # "DoseToMedium"
+s:Sc/Edep/Component                  = "SD_Tank"
+b:Sc/Edep/PropagateToChildren = "True"
+b:Sc/Edep/OutputToConsole            = "FALSE"
+s:Sc/Edep/IfOutputFileAlreadyExists  = "Overwrite"
+i:Sc/Edep/XBins                      = 100
+i:Sc/Edep/YBins                      = 100
+i:Sc/Edep/ZBins                      = 300
+s:Sc/Edep/OutputFile = "Results/EnergyDepInPhantom"
+
+#
 s:Sc/DoseAtPhantomParallel/Quantity                   = "DoseToMedium"
 s:Sc/DoseAtPhantomParallel/Component                  = "SD_Tank"
+b:Sc/DoseAtPhantomParallel/PropagateToChildren = "True"
 b:Sc/DoseAtPhantomParallel/OutputToConsole            = "FALSE"
 s:Sc/DoseAtPhantomParallel/IfOutputFileAlreadyExists  = "Overwrite"
-i:Sc/DoseAtPhantomParallel/XBins                      = 60
-i:Sc/DoseAtPhantomParallel/YBins                      = 60
+i:Sc/DoseAtPhantomParallel/XBins                      = 100
+i:Sc/DoseAtPhantomParallel/YBins                      = 100
 i:Sc/DoseAtPhantomParallel/ZBins                      = 300
-s:Sc/DoseAtPhantomParallel/OutputFile = "Results/DoseInPhantom"
+s:Sc/DoseAtPhantomParallel/OutputFile = "Results/DoseToMedium"
+#
+# s:Sc/DoseAtWater/Quantity                   = "DoseToWater"
+# s:Sc/DoseAtWater/Component                  = "SD_Tank"
+# b:Sc/DoseAtWater/PropagateToChildren = "True"
+# b:Sc/DoseAtWater/OutputToConsole            = "FALSE"
+# s:Sc/DoseAtWater/IfOutputFileAlreadyExists  = "Overwrite"
+# i:Sc/DoseAtWater/XBins                      = 100
+# i:Sc/DoseAtWater/YBins                      = 100
+# i:Sc/DoseAtWater/ZBins                      = 300
+# s:Sc/DoseAtWater/OutputFile = "Results/DoseToWater"
+#
+# s:Sc/DoseAtMaterial/Quantity                   = "DoseToMaterial"
+# s:Sc/DoseAtMaterial/Component                  = "SD_Tank"
+# b:Sc/DoseAtMaterial/PropagateToChildren = "True"
+# s:Sc/DoseAtMaterial/Material = "G4_WATER"
+# b:Sc/DoseAtMaterial/OutputToConsole            = "FALSE"
+# s:Sc/DoseAtMaterial/IfOutputFileAlreadyExists  = "Overwrite"
+# i:Sc/DoseAtMaterial/XBins                      = 100
+# i:Sc/DoseAtMaterial/YBins                      = 100
+# i:Sc/DoseAtMaterial/ZBins                      = 300
+# s:Sc/DoseAtMaterial/OutputFile = "Results/DoseToMaterial"
+
 
 # includeFile = GeometryComponents/VoxelMaterials.txt
 
