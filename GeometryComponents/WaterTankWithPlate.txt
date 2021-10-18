@@ -1,0 +1,104 @@
+includeFile = Materials.txt
+
+s:Ge/wTankBody/Parent   = "World"
+s:Ge/wTankBody/Type     = "TsBox"
+s:Ge/wTankBody/Material = "Lucite"
+d:Ge/wTankBody/HLX      = 20.5 cm
+d:Ge/wTankBody/HLY      = 20.5 cm
+d:Ge/wTankBody/HLZ      = 20.5 cm
+
+s:Ge/wTankBody/DrawingStyle = "WireFrame"
+
+s:Ge/wTank/Parent   = "wTankBody"
+s:Ge/wTank/Type     = "TsBox"
+s:Ge/wTank/Material = "G4_WATER"
+d:Ge/wTank/HLX      = 20.0 cm
+d:Ge/wTank/HLY      = 20.25 cm
+d:Ge/wTank/HLZ      = 20.0 cm
+d:Ge/wTank/TransY     = 0.25 cm
+#s:Ge/wTank/DrawingStyle = "Solid"
+
+
+s:Ge/SD_Tank/Parent   = "wTankBody"
+s:Ge/SD_Tank/Type     = "TsBox"
+s:Ge/SD_Tank/Material = "G4_WATER"
+d:Ge/SD_Tank/HLX      = 6.5 cm
+d:Ge/SD_Tank/HLY      = 6.5 cm
+d:Ge/SD_Tank/HLZ      = 15.0 cm
+d:Ge/SD_Tank/TransZ   = -5. cm
+
+
+s:Ge/CellCulturePlate/Parent            = "SD_Tank"
+s:Ge/CellCulturePlate/Type              = "CellCulturePlate"
+s:Ge/CellCulturePlate/Material          = "Lucite"
+s:Ge/CellCulturePlate/DrawingStyle 	    = "Solid"
+#b:Ge/CellCulturePlate/PrintInformation = "True"
+
+i:Ge/CellCulturePlate/numberOfColumns   = 6
+i:Ge/CellCulturePlate/numberOfRows      = 4
+d:Ge/CellCulturePlate/wellsHeight       = 17.5 mm
+d:Ge/CellCulturePlate/wellsInnerDiametr = 15.5 mm
+d:Ge/CellCulturePlate/wellsOuterDiametr = 17.7 mm
+i:Ge/CellCulturePlate/numberOfPlates    = 1
+d:Ge/CellCulturePlate/plateWidth        = 127.6 mm
+d:Ge/CellCulturePlate/plateLength       = 85.4 mm
+d:Ge/CellCulturePlate/plateHeigth       = 20.2 mm
+d:Ge/CellCulturePlate/plateThickness    = 1.0 mm
+d:Ge/CellCulturePlate/gapBetweenWells   = 1.0 mm
+
+
+
+
+
+#
+# X binning causes creation of a parallel world for scoring
+s:Sc/Edep/Quantity                   = "EnergyDeposit" # "DoseToMedium"
+s:Sc/Edep/Component                  = "SD_Tank"
+b:Sc/Edep/PropagateToChildren = "True"
+b:Sc/Edep/OutputToConsole            = "FALSE"
+s:Sc/Edep/IfOutputFileAlreadyExists  = "Overwrite"
+i:Sc/Edep/XBins                      = 100
+i:Sc/Edep/YBins                      = 100
+i:Sc/Edep/ZBins                      = 300
+s:Sc/Edep/OutputFile = "Results/EnergyDepInPhantom"
+
+#
+s:Sc/DoseAtPhantomParallel/Quantity                   = "DoseToMedium"
+s:Sc/DoseAtPhantomParallel/Component                  = "SD_Tank"
+b:Sc/DoseAtPhantomParallel/PropagateToChildren = "True"
+b:Sc/DoseAtPhantomParallel/OutputToConsole            = "FALSE"
+s:Sc/DoseAtPhantomParallel/IfOutputFileAlreadyExists  = "Overwrite"
+i:Sc/DoseAtPhantomParallel/XBins                      = 100
+i:Sc/DoseAtPhantomParallel/YBins                      = 100
+i:Sc/DoseAtPhantomParallel/ZBins                      = 300
+s:Sc/DoseAtPhantomParallel/OutputFile = "Results/DoseToMedium"
+#
+# s:Sc/DoseAtWater/Quantity                   = "DoseToWater"
+# s:Sc/DoseAtWater/Component                  = "SD_Tank"
+# b:Sc/DoseAtWater/PropagateToChildren = "True"
+# b:Sc/DoseAtWater/OutputToConsole            = "FALSE"
+# s:Sc/DoseAtWater/IfOutputFileAlreadyExists  = "Overwrite"
+# i:Sc/DoseAtWater/XBins                      = 100
+# i:Sc/DoseAtWater/YBins                      = 100
+# i:Sc/DoseAtWater/ZBins                      = 300
+# s:Sc/DoseAtWater/OutputFile = "Results/DoseToWater"
+#
+# s:Sc/DoseAtMaterial/Quantity                   = "DoseToMaterial"
+# s:Sc/DoseAtMaterial/Component                  = "SD_Tank"
+# b:Sc/DoseAtMaterial/PropagateToChildren = "True"
+# s:Sc/DoseAtMaterial/Material = "G4_WATER"
+# b:Sc/DoseAtMaterial/OutputToConsole            = "FALSE"
+# s:Sc/DoseAtMaterial/IfOutputFileAlreadyExists  = "Overwrite"
+# i:Sc/DoseAtMaterial/XBins                      = 100
+# i:Sc/DoseAtMaterial/YBins                      = 100
+# i:Sc/DoseAtMaterial/ZBins                      = 300
+# s:Sc/DoseAtMaterial/OutputFile = "Results/DoseToMaterial"
+
+
+# includeFile = GeometryComponents/VoxelMaterials.txt
+
+# s:Sc/wTankScorer/Quantity = "DoseToMedium"
+# s:Sc/wTankScorer/Component = "SD_Tank"
+# s:Sc/wTankScorer/Material = "G4_WATER"
+# s:Sc/wTank/OutputFile = "wTankDose.txt"
+# S:Sc/wTankScorer/IfOutputFileAlreadyExists = "Overwrite"
