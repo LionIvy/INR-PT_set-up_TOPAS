@@ -147,7 +147,7 @@ b:Sc/PhaseSpaceAtFilm/IncludeParentID             = "True"
 b:Sc/PhaseSpaceAtFilm/IncludeVertexInfo           = "True"
 b:Sc/PhaseSpaceAtFilm/IncludeSeed                 = "True"
 #sv:Sc/PhaseSpaceAtFilm/OnlyIncludeParticlesNamed = 1 "Proton"
-s:Sc/PhaseSpaceAtFilm/IfOutputFileAlreadyExists   = "Increment" # "Overwrite"
+s:Sc/PhaseSpaceAtFilm/IfOutputFileAlreadyExists   = "Overwrite" #"Increment" # "Overwrite"
 
 #---------------------------------------------------
 # Ridgefilter
@@ -155,18 +155,19 @@ s:Sc/PhaseSpaceAtFilm/IfOutputFileAlreadyExists   = "Increment" # "Overwrite"
 includeFile = GeometryComponents/RidgeFilter_209MeV_5cm.txt
 d:Ge/RidgeFilter/TransZ = 100 cm
 d:Ge/RidgeFilter/RotX = 180 deg
-#d:Ge/RidgeFilter/RotZ = 90 deg
+# d:Ge/RidgeFilter/RotZ = 90 deg
 
 
 #---------------------------------------------------
-#waterTank
+# waterTank
 #---------------------------------------------------
-includeFile = GeometryComponents/WaterTank.txt
+#includeFile = GeometryComponents/WaterTank.txt
+includeFile = GeometryComponents/WaterTankWithPlate.txt
 d:Ge/wTankBody/TransZ   = 257. cm
 #===================================================
 # Physics
 #===================================================
-sv:Ph/Default/Modules       = 1 "g4em-standard_opt4"
+sv:Ph/Default/Modules       = 8 "g4em-standard_opt4" "g4decay" "g4radioactivedecay" "g4ion-binarycascade"  "g4em-extra" "g4h-elastic_HP" "g4stopping" "g4h-phy_QGSP_BIC_AllHP"
 
 #===================================================
 # Beam
@@ -182,13 +183,13 @@ s:So/MySource/Type = "Beam" # Beam, Isotropic, Emittance or PhaseSpace
 s:So/MySource/Component = "BeamPosition"
 s:So/MySource/BeamParticle = "proton"
 d:So/MySource/BeamEnergy = 209.0 MeV
-u:So/MySource/BeamEnergySpread = 0.757504
-s:So/MySource/BeamPositionDistribution = "Gaussian" # None, Flat or Gaussian
+u:So/MySource/BeamEnergySpread = 0.01
+s:So/MySource/BeamPositionDistribution = "Flat" # None, Flat or Gaussian
 s:So/MySource/BeamPositionCutoffShape = "Ellipse" # Rectangle or Ellipse (if Flat or Gaussian)
-d:So/MySource/BeamPositionCutoffX = 3. cm # X extent of position (if Flat or Gaussian)
-d:So/MySource/BeamPositionCutoffY = 3. cm # Y extent of position (if Flat or Gaussian)
-d:So/MySource/BeamPositionSpreadX = 0.65 cm # distribution (if Gaussian)
-d:So/MySource/BeamPositionSpreadY = 0.65 cm # distribution (if Gaussian)
+d:So/MySource/BeamPositionCutoffX = 0.1 cm # X extent of position (if Flat or Gaussian)
+d:So/MySource/BeamPositionCutoffY = 0.1 cm # Y extent of position (if Flat or Gaussian)
+d:So/MySource/BeamPositionSpreadX = 3.0 cm # distribution (if Gaussian)
+d:So/MySource/BeamPositionSpreadY = 3.0 cm # distribution (if Gaussian)
 s:So/MySource/BeamAngularDistribution = "Gaussian" # None, Flat or Gaussian
 d:So/MySource/BeamAngularCutoffX = 90. deg # X cutoff of angular distrib (if Flat or Gaussian)
 d:So/MySource/BeamAngularCutoffY = 90. deg # Y cutoff of angular distrib (if Flat or Gaussian)
@@ -214,8 +215,8 @@ d:Ge/BeamPosition/RotZ=180. deg
 Ts/NumberOfThreads          = 0 # Change to 0 to use all available threads
 b:Ts/ShowCPUTime            = "True"
 i:Ts/RunVerbosity = 0
-i:Ts/ShowHistoryCountAtInterval = 10000
-i:So/MySource/NumberOfHistoriesInRun = 1000000
-b:Gr/Enable = "False"
-#Ts/UseQt = "True"
+i:Ts/ShowHistoryCountAtInterval = 100
+i:So/MySource/NumberOfHistoriesInRun = 100
+#b:Gr/Enable = "False"
+Ts/UseQt = "True"
 b:Ts/PauseBeforeQuit        = Gr/Enable
