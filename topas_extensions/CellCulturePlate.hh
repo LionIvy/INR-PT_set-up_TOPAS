@@ -9,9 +9,12 @@ public:
     CellCulturePlate(TsParameterManager* pM, TsExtensionManager* eM, TsMaterialManager* mM, TsGeometryManager* gM,
 				  TsVGeometryComponent* parentComponent, G4VPhysicalVolume* parentVolume, G4String& name);
     ~CellCulturePlate();
-    bool wellsAreSolid = false;
 
 	G4VPhysicalVolume* Construct();
+
+private:
+  G4bool  wellsAreSolid = false;
+  G4int   numberOfPlates = 1;
 };
 
 #endif

@@ -39,14 +39,14 @@ i:Ge/CellCulturePlate/numberOfRows      = 4
 d:Ge/CellCulturePlate/wellsHeight       = 17.5 mm
 d:Ge/CellCulturePlate/wellsInnerDiametr = 15.5 mm
 d:Ge/CellCulturePlate/wellsOuterDiametr = 17.7 mm
-i:Ge/CellCulturePlate/numberOfPlates    = 2
+d:Ge/CellCulturePlate/wellsBottomThickness = 1 mm
 d:Ge/CellCulturePlate/plateWidth        = 127.6 mm
 d:Ge/CellCulturePlate/plateLength       = 85.4 mm
 d:Ge/CellCulturePlate/plateHeigth       = 20.2 mm
 d:Ge/CellCulturePlate/plateThickness    = 1.0 mm
 d:Ge/CellCulturePlate/gapBetweenWells   = 1.0 mm
 
-
+d:Ge/CellCulturePlate/TransZ = 10 cm # depth - d:Ge/SD_Tank/HLZ 
 
 
 
@@ -54,7 +54,7 @@ d:Ge/CellCulturePlate/gapBetweenWells   = 1.0 mm
 # X binning causes creation of a parallel world for scoring
 s:Sc/Edep/Quantity                   = "EnergyDeposit" # "DoseToMedium"
 s:Sc/Edep/Component                  = "SD_Tank"
-b:Sc/Edep/PropagateToChildren = "True"
+b:Sc/Edep/PropagateToChildren        = "True"
 b:Sc/Edep/OutputToConsole            = "FALSE"
 s:Sc/Edep/IfOutputFileAlreadyExists  = "Overwrite"
 i:Sc/Edep/XBins                      = 100

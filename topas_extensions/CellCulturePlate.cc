@@ -38,6 +38,15 @@ CellCulturePlate::CellCulturePlate(TsParameterManager* pM, TsExtensionManager* e
 			 TsVGeometryComponent* parentComponent, G4VPhysicalVolume* parentVolume, G4String& name) :
 TsVGeometryComponent(pM, eM, mM, gM, parentComponent, parentVolume, name)
 {
+	if (fPm->ParameterExists(GetFullParmName("wellsAreSolid"))){
+		wellsAreSolid = fPm -> GetBooleanParameter(GetFullParmName("wellsAreSolid"));
+	}
+	if (fPm->ParameterExists(GetFullParmName("numberOfPlates"))){
+		numberOfPlates		= fPm -> GetIntegerParameter( GetFullParmName("numberOfPlates") );
+	}else{
+		numberOfPlates = 1;
+	}
+
 }
 
 
@@ -52,7 +61,7 @@ G4VPhysicalVolume* CellCulturePlate::Construct()
   // Fetch geometry parametrs
   //================================================================================
 
-	G4int			numberOfPlates		= fPm -> GetIntegerParameter( GetFullParmName("numberOfPlates") );
+
 	G4double	plateWidth				= fPm -> GetDoubleParameter ( GetFullParmName("plateWidth"), "Length");
   G4double	plateLength				= fPm -> GetDoubleParameter ( GetFullParmName("plateLength"), "Length");
 	G4double	plateHeigth				= fPm -> GetDoubleParameter ( GetFullParmName("plateHeigth"), "Length");
@@ -65,7 +74,11 @@ G4VPhysicalVolume* CellCulturePlate::Construct()
   G4double wellsInnerDiametr	= fPm -> GetDoubleParameter ( GetFullParmName("wellsInnerDiametr"), "Length");
 	G4double wellsOuterDiametr	= fPm -> GetDoubleParameter ( GetFullParmName("wellsOuterDiametr"), "Length");
   G4double gapBetweenWells		= fPm -> GetDoubleParameter ( GetFullParmName("gapBetweenWells"), "Length");
-  G4double wellsBottomThickness = plateThickness;
+  G4double wellsBottomThickness = fPm -> GetDoubleParameter ( GetFullParmName("wellsBottomThickness"), "Length");
+
+
+
+
 
 	//================================================================================
   // Colors
@@ -73,9 +86,9 @@ G4VPhysicalVolume* CellCulturePlate::Construct()
 	G4VisAttributes* yellowWire= new G4VisAttributes( G4Colour(255., 211., 0.));
     yellowWire -> SetVisibility(true);
     yellowWire -> SetForceWireframe(true);
-	G4VisAttributes* yellow= new G4VisAttributes( G4Colour(255., 211., 0.));
-	  yellow -> SetVisibility(true);
-	  yellow -> SetForceSolid(true);
+	G4VisAttributes* yellowSolid= new G4VisAttributes( G4Colour(255., 211., 0.));
+	  yellowSolid -> SetVisibility(true);
+	  yellowSolid -> SetForceSolid(true);
 
 	G4VisAttributes* blueFrame= new G4VisAttributes( G4Colour(0., 0., 255.));
 		blueFrame -> SetVisibility(true);
@@ -148,7 +161,7 @@ if(dY < 0){
 	return 0;
 }
 G4double wellPositionX, wellPositionY;
-G4double wellPositionZ = 0. *mm;
+G4double wellPositionZ = 0.5 * (wellsAreaZ - wellsHeight);
 G4ThreeVector* pos;
 plateBox = new G4Box("plateBox", 0.5 * plateWidth, 0.5 * plateLength, 0.5 * plateHeigth);
 plateBoxLog = CreateLogicalVolume("logicPlateBox", CCPMaterial, plateBox);
@@ -160,11 +173,13 @@ emptyBoxLog -> SetVisAttributes(whiteWire);
 
 sWell = new G4Tubs("Well", wellsInnerDiametr*0.5, wellsOuterDiametr*0.5, wellsHeight*0.5, 0., 360*deg);
 lWell = CreateLogicalVolume("Well", CCPMaterial, sWell);
-lWell -> SetVisAttributes(yellowWire);
+if(wellsAreSolid){
+			lWell -> SetVisAttributes(yellowSolid);}
+else{ lWell -> SetVisAttributes(yellowWire); }
 
 sWellBottom = new G4Tubs("WellBottom", 0, wellsInnerDiametr*0.5, wellsBottomThickness*0.5, 0., 360*deg);
 lWellBottom = CreateLogicalVolume("Well", CCPMaterial, sWellBottom);
-lWellBottom -> SetVisAttributes(blueFrame);
+lWellBottom -> SetVisAttributes(yellowSolid);
 
 for (G4int plateNum = 0; plateNum < numberOfPlates; ++plateNum){
 	plateBoxPhys = new G4PVPlacement(0,G4ThreeVector(0, 0, -HLZ + 0.5 * plateHeigth + plateNum * plateHeigth),
@@ -173,7 +188,7 @@ for (G4int plateNum = 0; plateNum < numberOfPlates; ++plateNum){
 																		fEnvelopePhys,false,0);
 
 	emptyBoxPhys = new G4PVPlacement(0,
-																					G4ThreeVector(0, 0, 0),
+																					G4ThreeVector(0, 0, -0.5 * (plateHeigth-wellsAreaZ)),
 																					"physicalEmptyBox",
 																					emptyBoxLog,
 																					plateBoxPhys,false,0);

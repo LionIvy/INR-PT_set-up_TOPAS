@@ -167,7 +167,9 @@ d:Ge/wTankBody/TransZ   = 257. cm
 #===================================================
 # Physics
 #===================================================
-sv:Ph/Default/Modules       = 8 "g4em-standard_opt4" "g4decay" "g4radioactivedecay" "g4ion-binarycascade"  "g4em-extra" "g4h-elastic_HP" "g4stopping" "g4h-phy_QGSP_BIC_AllHP"
+sv:Ph/Default/Modules       = 1 "g4em-standard_opt0"
+
+# sv:Ph/Default/Modules       = 8 "g4em-standard_opt4" "g4decay" "g4radioactivedecay" "g4ion-binarycascade"  "g4em-extra" "g4h-elastic_HP" "g4stopping" "g4h-phy_QGSP_BIC_AllHP"
 
 #===================================================
 # Beam
