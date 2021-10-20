@@ -45,8 +45,12 @@ d:Ge/CellCulturePlate/plateLength       = 85.4 mm
 d:Ge/CellCulturePlate/plateHeigth       = 20.2 mm
 d:Ge/CellCulturePlate/plateThickness    = 1.0 mm
 d:Ge/CellCulturePlate/gapBetweenWells   = 1.0 mm
+#i:Ge/CellCulturePlate/plateOrientation  = -1 # plate orientation if numberOfPlates = 1
 
-d:Ge/CellCulturePlate/TransZ = 10 cm # depth - d:Ge/SD_Tank/HLZ 
+i:Ge/CellCulturePlate/numberOfPlates = 2
+iv:Ge/CellCulturePlate/platesOrientationVector = 2 -1 1
+
+d:Ge/CellCulturePlate/TransZ = 10 cm # depth - d:Ge/SD_Tank/HLZ
 
 
 

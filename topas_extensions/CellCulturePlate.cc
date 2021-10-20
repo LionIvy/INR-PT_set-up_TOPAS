@@ -46,6 +46,21 @@ TsVGeometryComponent(pM, eM, mM, gM, parentComponent, parentVolume, name)
 	}else{
 		numberOfPlates = 1;
 	}
+	if (fPm->ParameterExists(GetFullParmName("plateOrientation"))){
+		plateOrientation		= fPm -> GetIntegerParameter( GetFullParmName("plateOrientation") );
+	}else{
+		plateOrientation = 1;
+	}
+
+	if (fPm->ParameterExists(GetFullParmName("platesOrientationVector"))){
+		platesOrientationVector		= fPm -> GetIntegerVector( GetFullParmName("platesOrientationVector") );
+	}else{
+		platesOrientationVector = new G4int[numberOfPlates];
+		for(G4int plateNum = 0; plateNum < numberOfPlates; ++plateNum){
+			platesOrientationVector[plateNum] = plateOrientation;
+		}
+	}
+
 
 }
 
@@ -75,7 +90,6 @@ G4VPhysicalVolume* CellCulturePlate::Construct()
 	G4double wellsOuterDiametr	= fPm -> GetDoubleParameter ( GetFullParmName("wellsOuterDiametr"), "Length");
   G4double gapBetweenWells		= fPm -> GetDoubleParameter ( GetFullParmName("gapBetweenWells"), "Length");
   G4double wellsBottomThickness = fPm -> GetDoubleParameter ( GetFullParmName("wellsBottomThickness"), "Length");
-
 
 
 
@@ -122,6 +136,7 @@ G4VPhysicalVolume* CellCulturePlate::Construct()
 	//fEnvelopeLog->SetVisAttributes(fPm->GetInvisible());
 	fEnvelopeLog -> SetVisAttributes(blueFrame);
 	fEnvelopePhys = CreatePhysicalVolume(fEnvelopeLog);
+
 
   //--------------------------------------------------------------------------------
   // the Plate
@@ -181,8 +196,30 @@ sWellBottom = new G4Tubs("WellBottom", 0, wellsInnerDiametr*0.5, wellsBottomThic
 lWellBottom = CreateLogicalVolume("Well", CCPMaterial, sWellBottom);
 lWellBottom -> SetVisAttributes(yellowSolid);
 
+
+G4RotationMatrix* rMatrix			= new G4RotationMatrix();
+G4RotationMatrix* rMatrix180	= new G4RotationMatrix();
+rMatrix180 -> rotateX(180.0*deg);
+
+
 for (G4int plateNum = 0; plateNum < numberOfPlates; ++plateNum){
-	plateBoxPhys = new G4PVPlacement(0,G4ThreeVector(0, 0, -HLZ + 0.5 * plateHeigth + plateNum * plateHeigth),
+
+	if (numberOfPlates > 1){
+		if(platesOrientationVector[plateNum] >= 0){
+			rMatrix = 0;
+		}else{
+			rMatrix = rMatrix180;
+		}
+	}else{
+		if(plateOrientation >= 0){
+			rMatrix = 0;
+		}else{
+			rMatrix = rMatrix180;
+		}
+	}
+
+
+	plateBoxPhys = new G4PVPlacement(rMatrix,G4ThreeVector(0, 0, -HLZ + 0.5 * plateHeigth + plateNum * plateHeigth),
 																		"physicalPlateBox",
 																		plateBoxLog,
 																		fEnvelopePhys,false,0);
